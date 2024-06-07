@@ -38,7 +38,7 @@
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
-			<UserProperties DisLinkedXmlFile="..\Automation Script Context.xml" DisProjectType="disMacroProject" DisLinkId="" />
+			<UserProperties DisLinkedXmlFile="..\Create Script Context.xml" DisProjectType="disMacroProject" DisLinkId="" />
 		</VisualStudio>
 	</ProjectExtensions>
 </Project>

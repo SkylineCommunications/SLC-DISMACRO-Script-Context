@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Xml.Linq;
 
-using SLDISMacros.Extensions;
+using Create_Script_Context_1;
+
 using SLDisMacros.Interfaces;
 
 public class Script
@@ -14,7 +15,7 @@ public class Script
 	{
 		// Load XML Document
 		string script = engine.Input.FileContent;
-		XDocument xDoc = MacroExtensions.StringToXDocument(script);
+		XDocument xDoc = XDocument.Parse(script);
 		XNamespace ns = "http://www.skyline.be/automation";
 
 		// Get the ScriptParameters
@@ -26,6 +27,8 @@ public class Script
 				Values = param.Attribute("values")?.Value,
 				Description = param.Element(ns + "Description")?.Value,
 			});
+
+		engine.LogToOutputWindow(String.Join(Environment.NewLine, parameters.Select(x => $"{x.Id},\t{x.Type},\t{x.Values},\t{x.Description}")));
 
 		// Create ScriptContext class
 		var builder = new TabbedStringBuilder();
@@ -53,7 +56,7 @@ public class Script
 		builder.AppendLine();
 		foreach (var parameter in parameters)
 		{
-			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"{parameter.Description}\").Single();");
+			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"Agent Id\").Single();");
 		}
 
 		builder.CloseCurlyBraces();
@@ -74,7 +77,7 @@ public class Script
 		builder.AppendLine("private static string[] GetScriptParam(string name)");
 		builder.OpenCurlyBraces();
 
-		builder.AppendLine("var rawValue = Engine.GetScriptParam(name)?.Value;");
+		builder.AppendLine("var rawValue = Engine.GetScriptParam(name).Value;");
 		builder.AppendLine("if (String.IsNullOrEmpty(rawValue))");
 		builder.OpenCurlyBraces();
 		builder.AppendLine("throw new ArgumentException($\"Script Param '{name}' cannot be left empty.\");");
@@ -113,56 +116,8 @@ public class Script
 	}
 }
 
-public class ScriptParameter
+namespace Create_Script_Context_1
 {
-	public string Id { get; set; }
-
-	public string Type { get; set; }
-
-	public string Values { get; set; }
-
-	public string Description { get; set; }
-}
-
-namespace SLDISMacros.Extensions
-{
-	using System.Text.RegularExpressions;
-
-	public static class MacroExtensions
-	{
-		public static string GetSelectedText(this IMacroInput input)
-		{
-			List<string> selectedTextParts = new List<string>();
-
-			foreach (var selectedSpan in input.SelectedTextSpans)
-			{
-				selectedTextParts.Add(selectedSpan.Text);
-			}
-
-			return String.Join(null, selectedTextParts);
-		}
-
-		public static XDocument StringToXDocument(string text)
-		{
-			XDocument xDoc;
-
-			try
-			{
-				xDoc = XDocument.Parse(text);
-
-				//bIsTempRootTagAdded = false;
-			}
-			catch (Exception)
-			{
-				xDoc = XDocument.Parse("<TempRoot>" + text + "</TempRoot>");
-
-				//bIsTempRootTagAdded = true;
-			}
-
-			return xDoc;
-		}
-	}
-
 	public static class StringExtensions
 	{
 		public static string Filtered(this string str)
@@ -213,6 +168,17 @@ namespace SLDISMacros.Extensions
 				.Replace('-', '_')
 				.FirstLetterToUpper();
 		}
+	}
+
+	public class ScriptParameter
+	{
+		public string Id { get; set; }
+
+		public string Type { get; set; }
+
+		public string Values { get; set; }
+
+		public string Description { get; set; }
 	}
 
 	public class TabbedStringBuilder
