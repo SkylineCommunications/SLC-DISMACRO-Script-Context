@@ -3,6 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SkylineCommunications_SLC-DISMACRO-Script-Context&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=SkylineCommunications_SLC-DISMACRO-Script-Context)
 
 Contains a DIS Macro to generate a ScriptContext class that retrieves all the ScriptParameter tags and parses them into properties.
+The macro includes a check for a JSON array, because low code apps will fill in those parameters as a json array.
 
 > [!Note]
 > This generated class can be used as a start. For example all the properties are generated as "string" because the ScriptParameter attribute "type" only supports string.

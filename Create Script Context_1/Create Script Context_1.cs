@@ -27,8 +27,6 @@ public class Script
 				Description = param.Element(ns + "Description")?.Value,
 			});
 
-		engine.LogToOutputWindow(String.Join(Environment.NewLine, parameters.Select(x => $"{x.Id},\t{x.Type},\t{x.Values},\t{x.Description}")));
-
 		// Create ScriptContext class
 		var builder = new TabbedStringBuilder();
 		builder.AppendLine("namespace Skyline.DataMiner.Automation");
