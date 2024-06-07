@@ -55,7 +55,7 @@ public class Script
 		builder.AppendLine();
 		foreach (var parameter in parameters)
 		{
-			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"Agent Id\").Single();");
+			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"{parameter.Description}\").Single();");
 		}
 
 		builder.CloseCurlyBraces();
