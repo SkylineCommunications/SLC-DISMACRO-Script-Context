@@ -49,9 +49,9 @@ namespace Skyline.DataMiner.Automation
 			Engine = engine;
 
 			AgentId = GetScriptParam("Agent Id").Single();
-			ElementId = GetScriptParam("Agent Id").Single();
-			RepoName = GetScriptParam("Agent Id").Single();
-			RepoOwner = GetScriptParam("Agent Id").Single();
+			ElementId = GetScriptParam("Element Id").Single();
+			RepoName = GetScriptParam("Repo Name").Single();
+			RepoOwner = GetScriptParam("Repo Owner").Single();
 		}
 
 		public IEngine Engine { get; }
