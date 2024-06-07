@@ -76,7 +76,7 @@ public class Script
 		builder.AppendLine("private static string[] GetScriptParam(string name)");
 		builder.OpenCurlyBraces();
 
-		builder.AppendLine("var rawValue = Engine.GetScriptParam(name).Value;");
+		builder.AppendLine("var rawValue = Engine.GetScriptParam(name)?.Value;");
 		builder.AppendLine("if (String.IsNullOrEmpty(rawValue))");
 		builder.OpenCurlyBraces();
 		builder.AppendLine("throw new ArgumentException($\"Script Param '{name}' cannot be left empty.\");");

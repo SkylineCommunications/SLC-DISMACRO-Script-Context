@@ -4,6 +4,100 @@
 
 Contains a DIS Macro to generate a ScriptContext class that retrieves all the ScriptParameter tags and parses them into properties.
 
+> [!Note]
+> This generated class can be used as a start. For example all the properties are generated as "string" because the ScriptParameter attribute "type" only supports string.
+> You can then edit this generated class and change your properties to be for example an integer, or an enum, by updating the constructor.
+
+## Installation
+
+You can do a manual install by downloading the .xml file from the releases.
+1. Go to [releases](https://github.com/SkylineCommunications/SLC-DISMACRO-Script-Context/releases)
+1. Download the .xml file from the latest version
+1. Go to Visual Studio -> Extension -> DIS -> Tool Windows -> DIS Macros
+1. In the DIS Macros windows right click "My Macros"
+1. Click on "Import macros...", this will open a windows explorer dialog
+1. Go to the file you just downloaded.
+
+## How to use
+
+1. Open an Automation Script in visual studio. 
+1. Open the Automation Script's .xml file.
+1. Open the DIS Macros tool window.
+1. Select the "Create Script Context" macro
+1. Press run at the top of the DIS Macros window.
+1. The ScriptContext class will be copied to your Clipboard.
+1. Create a new file in your Automation Script Solution, for example: "ScriptContext.cs".
+1. Paste the generated code.
+
+## Example
+
+```csharp
+namespace Skyline.DataMiner.Automation
+{
+	using System;
+	using System.Linq;
+
+	using Newtonsoft.Json;
+
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+
+	public class ScriptContext
+	{
+		public ScriptContext(IEngine engine)
+		{
+			Engine = engine;
+
+			AgentId = GetScriptParam("Agent Id").Single();
+			ElementId = GetScriptParam("Agent Id").Single();
+			RepoName = GetScriptParam("Agent Id").Single();
+			RepoOwner = GetScriptParam("Agent Id").Single();
+		}
+
+		public IEngine Engine { get; }
+
+		public string AgentId { get; }
+
+		public string ElementId { get; }
+
+		public string RepoName { get; }
+
+		public string RepoOwner { get; }
+
+		private static string[] GetScriptParam(string name)
+		{
+			var rawValue = Engine.GetScriptParam(name)?.Value;
+			if (String.IsNullOrEmpty(rawValue))
+			{
+				throw new ArgumentException($"Script Param '{name}' cannot be left empty.");
+			}
+
+			if (IsJsonArray(rawValue))
+			{
+				return JsonConvert.DeserializeObject<string[]>(rawValue);
+			}
+			else
+			{
+				return new[] { rawValue };
+			}
+		}
+
+		private static bool IsJsonArray(string json)
+		{
+			try
+			{
+				JArray.Parse(json);
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+	}
+}
+```
+
 ## About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. 
