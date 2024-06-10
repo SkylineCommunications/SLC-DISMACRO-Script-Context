@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{49
 		Internal\.editorconfig = Internal\.editorconfig
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{37763EB9-DFB9-4D16-BB93-CF924169BC27}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Macros", "Macros", "{37763EB9-DFB9-4D16-BB93-CF924169BC27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{9A465A4D-A512-4BDB-AB88-132D196D176A}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create Script Context", "Cr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{CFC00DDC-A29D-4849-B433-66930B5F785A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Create Script Context_1", "Create Script Context_1\Create Script Context_1.csproj", "{A0D55B92-547F-4ACA-B701-8642BB1E46A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Create Script Context", "Create Script Context\Create Script Context.csproj", "{A0D55B92-547F-4ACA-B701-8642BB1E46A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
