@@ -20,21 +20,18 @@
 		<PackageReference Include="Skyline.DataMiner.CICD.Parsers.Common" Version="1.0.11" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Reference Include="PresentationCore" />
-	  <Reference Include="SLDisCommon">
-	    <HintPath>..\Dlls\SLDisCommon.dll</HintPath>
-	  </Reference>
-	  <Reference Include="SLDisLib">
-	    <HintPath>..\Dlls\SLDisLib.dll</HintPath>
-	  </Reference>
-	  <Reference Include="SLDisMacros">
-	    <HintPath>..\Dlls\SLDisMacros.dll</HintPath>
-	  </Reference>
-	  <Reference Include="System.Xml" />
-	  <Reference Include="System.Xml.Linq" />
-	  <Reference Include="WindowsBase">
-	    <HintPath>..\Dlls\WindowsBase.dll</HintPath>
-	  </Reference>
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="PresentationCore" />
+		<Reference Include="SLDisCommon">
+			<HintPath>$(DIS_PATH)\SLDisCommon.dll</HintPath>
+		</Reference>
+		<Reference Include="SLDisLib">
+			<HintPath>$(DIS_PATH)\SLDisLib.dll</HintPath>
+		</Reference>
+		<Reference Include="SLDisMacros">
+			<HintPath>$(DIS_PATH)\SLDisMacros.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
