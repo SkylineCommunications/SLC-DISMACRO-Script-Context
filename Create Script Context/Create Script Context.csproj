@@ -32,6 +32,12 @@
 		<Reference Include="SLDisMacros">
 			<HintPath>$(DIS_PATH)\SLDisMacros.dll</HintPath>
 		</Reference>
+		<Reference Include="Microsoft.CodeAnalysis">
+			<HintPath>$(DIS_PATH)\Microsoft.CodeAnalysis.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.CodeAnalysis.CSharp">
+			<HintPath>$(DIS_PATH)\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
