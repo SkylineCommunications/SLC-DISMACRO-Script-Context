@@ -42,7 +42,6 @@ public class Script
 		builder.AppendLine("using Newtonsoft.Json;");
 		builder.AppendLine();
 		builder.AppendLine("using Skyline.DataMiner.Automation;");
-		builder.AppendLine("using Skyline.DataMiner.Utils.InteractiveAutomationScript;");
 		builder.AppendLine();
 
 		// ScriptContext
@@ -56,7 +55,7 @@ public class Script
 		builder.AppendLine();
 		foreach (var parameter in parameters)
 		{
-			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"Agent Id\").Single();");
+			builder.AppendLine($"{parameter.Description.Sanitize()} = GetScriptParam(\"{parameter.Description}\").Single();");
 		}
 
 		builder.CloseCurlyBraces();
@@ -74,7 +73,7 @@ public class Script
 		// Methods
 		// GetScriptParam
 		builder.AppendLine();
-		builder.AppendLine("private static string[] GetScriptParam(string name)");
+		builder.AppendLine("private string[] GetScriptParam(string name)");
 		builder.OpenCurlyBraces();
 
 		builder.AppendLine("var rawValue = Engine.GetScriptParam(name).Value;");
